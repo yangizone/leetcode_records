@@ -8,6 +8,7 @@
 
 
 struct ListNode* removeNthFromEnd(struct ListNode* head, int n){
-
+    struct ListNode *quick = (struct ListNode *)malloc(sizeof(struct ListNode));
+    struct ListNode *slow = (struct ListNode *)malloc(sizeof(struct ListNode));
 }
 
