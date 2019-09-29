@@ -29,16 +29,21 @@ struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
         sum = x + y + ca;
         curr->next = (struct ListNode *)malloc(sizeof(struct ListNode));
         curr->next->val = sum % 10;
+        //使用要先初始化
+        curr->next->next = NULL;
         ca = sum / 10;
 
-        curr = curr->next;      
-        list1 = list1->next;
-        list2 = list2->next;
+        curr = curr->next;
+        //当其中一个为空时要避免调用NULL->next
+        list1 = list1 ? list1->next : NULL;
+        list2 = list2 ? list2->next : NULL;
     }
 
     if(ca){
         curr->next = (struct ListNode *)malloc(sizeof(struct ListNode));
         curr->next->val = ca;
+        //使用要先初始化
+        curr->next->next = NULL;
     }
     return res->next;
 }
