@@ -15,9 +15,13 @@ struct ListNode* removeNthFromEnd(struct ListNode* head, int n){
     struct ListNode *quick = (struct ListNode *)malloc(sizeof(struct ListNode));
     struct ListNode *slow = (struct ListNode *)malloc(sizeof(struct ListNode));
     struct ListNode *dummy = (struct ListNode *)malloc(sizeof(struct ListNode));
+    //将dummy->next索引到head可以避免直接修改head
+    //同时在该题中也可以实现删除头结点的情况
     dummy->next = head;
-    quick = head;
-    slow = head;
+    // quick = head;
+    // slow = head;
+    quick = dummy;
+    slow = dummy;
     while(n+1>0&&quick){ //跳过n+1次，这样可以索引到删除的那个节点的前一个
         quick = quick->next;
         n--;
@@ -31,17 +35,7 @@ struct ListNode* removeNthFromEnd(struct ListNode* head, int n){
         quick = quick->next;
         slow = slow->next;
     }
-    //删除节点，那么意味着slow索引到该节点前一项
-    //说明slow和quick至少差两项
-    //需要判断slow->next是否为NULL
-    if(slow->next==NULL){
-        slow = NULL;
-    }
-    else
-    {
-        slow->next = slow->next->next;
-    }
-
+    slow->next = slow->next->next;
     return dummy->next;
 }
 
