@@ -5,6 +5,8 @@ int lengthOfLongestSubstring(char * s){
     //类似Leetcode53
     //当前重复，则重定位到此，否则+1，然后和之前最大值比较
     //有问题："dvdf"
+    //题解中称为经典的窗口滑动中的非定长算法，这个我根据出问题的用例之前也考虑过
+    //即若遇到重复的则重定位到重复字符串的下一位，不过复杂度我认为还在O(n^2)因此想寻求更高效的算法没想到啊
     //需要考虑字符串为空的情况
     if(*s=='\0'){
         return 0;
@@ -27,6 +29,8 @@ int lengthOfLongestSubstring(char * s){
         else{
             s_new[0] = *s;
             len = 1;
+            //TLE 复杂度依旧是O(n^2)，应该是需要Hashset这种降低复杂度
+            s -= (len - i);
         }           
         ans = (ans > len) ? ans : len;
         s++;
