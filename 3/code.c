@@ -27,13 +27,15 @@ int lengthOfLongestSubstring(char * s){
             s_new[len++] = *s;
         }
         else{
+            //TLE 复杂度依旧是O(n^2)，应该是需要Hashset这种降低复杂度
+            s -= (len - i - 1);
             s_new[0] = *s;
             len = 1;
-            //TLE 复杂度依旧是O(n^2)，应该是需要Hashset这种降低复杂度
-            s -= (len - i);
         }           
         ans = (ans > len) ? ans : len;
         s++;
+        //printf("%d", len);
+        //printf("%c", *s);
     }
     free(s_new);
     return ans;
