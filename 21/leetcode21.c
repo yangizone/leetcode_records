@@ -8,48 +8,27 @@
 
 
 struct ListNode* mergeTwoLists(struct ListNode* l1, struct ListNode* l2){
-
-    if(l1==NULL||l2==NULL){
+    if(l1==NULL&&l2==NULL){
         return NULL;
     }
     struct ListNode *result_ListNode = (struct ListNode *)malloc(sizeof(struct ListNode));
-    struct ListNode *l1_temp_ListNode = l1;
-    struct ListNode *l2_temp_ListNode = l2;
+    struct ListNode *Headres_ListNode = (struct ListNode *)malloc(sizeof(struct ListNode));
+    Headres_ListNode = result_ListNode;
 
-    if(*l1_temp_ListNode.val<=*l2_temp_ListNode.val){
-        result_ListNode.val = *l1_temp_ListNode.val;
-        l1_temp_ListNode = *l1_temp_ListNode.next;
-    }
-    else{
-        result_ListNode.val = *l2_temp_ListNode.val++;
-        l2_temp_ListNode = *l2_temp_ListNode.next;
-    }
-    
-    while(l1_temp_ListNode!=NULL&&l2_temp_ListNode!=NULL){
-        struct ListNode *temp_ListNode = NULL;
-        if(*l1_temp_ListNode.val<=*l2_temp_ListNode.val){
-            result_ListNode.next = l1_temp_ListNode;
-
-            l1_temp_ListNode = *l1_temp_ListNode.next;
+    while(l1 || l2){
+        int temp1 = l1 ? l1->val : INT_MAX;
+        int temp2 = l2 ? l2->val : INT_MAX;
+        result_ListNode->next = (struct ListNode *)malloc(sizeof(struct ListNode));
+        if(temp1 <= temp2){
+            result_ListNode->next->val = temp1;
+            l1 = l1->next;
         }
         else{
-            result_ListNode.val = *l2_temp_ListNode.val++;
-            l2_temp_ListNode = *l2_temp_ListNode.next;
+            result_ListNode->next->val = temp2;
+            l2 = l2->next;
         }
+        result_ListNode->next->next = NULL;
+        result_ListNode = result_ListNode->next;
     }
-    // struct ListNode *l1_temp_ListNode = l1;
-    // struct ListNode *l2_temp_ListNode = l2;
-
-
-    // while(l1!=NULL&&l2!=NULL){
-
-    //     struct ListNode *temp_ListNode = NULL;
-    //     if(l1.val<=l2.val){
-    //         //temp_ListNode = l1_temp_ListNode;
-    //         temp_ListNode.val = l1.val;
-    //         temp
-    //         *result_ListNode.next=
-    //     }
-    // }
-    // return result_ListNode;
+    return Headres_ListNode->next;
 }
