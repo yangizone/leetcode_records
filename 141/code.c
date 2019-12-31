@@ -5,6 +5,7 @@
  *     struct ListNode *next;
  * };
  */
+
 bool hasCycle(struct ListNode *head) {
     if(head==NULL){
         return false;
