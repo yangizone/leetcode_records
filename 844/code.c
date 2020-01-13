@@ -11,11 +11,7 @@ void InitStack(Stack *s){
 }
 
 bool IsStackEmpty(Stack *s){
-    bool flag = false;
-    if(s->top==s->base){
-        flag = true;
-    }
-    return flag;
+    return (s->top == s->base) ? true : false;
 }
 
 void PushStack(Stack *s, char e){
@@ -56,8 +52,11 @@ bool backspaceCompare(char * S, char * T){
         if(*S=='#'){
             PopStack(stackS);
         }
-        else{
+        else if (isalpha(*S)){
             PushStack(stackS, *S);
+        }
+        else{
+
         }
         S++;
     }
@@ -66,14 +65,19 @@ bool backspaceCompare(char * S, char * T){
         if(*T=='#'){
             PopStack(stackT);
         }
-        else{
+        else if (isalpha(*S)){
             PushStack(stackT, *T);
+        }
+        else{
+
         }
         T++;
     }
     //printf("运行到这了吗？"); //维测
 
     if(StackLen(stackS)!=StackLen(stackT)){
+        //printf("%d ",StackLen(stackS)); //维测
+        //printf("%d ",StackLen(stackT)); //维测
         DestoryStack(stackS);
         DestoryStack(stackT);
         return false;
@@ -85,6 +89,7 @@ bool backspaceCompare(char * S, char * T){
             return false;
         }
     }
+    //printf("%d",StackLen(stackS)); //维测
     DestoryStack(stackS);
     DestoryStack(stackT);
     return true;
@@ -103,3 +108,4 @@ allocated by thread T0 here:
 SUMMARY: AddressSanitizer: bad-free (/usr/local/lib64/libasan.so.5+0xe7f30) in free
 ==29==ABORTING
 */
+//20/01/13 暂时排查到 PushStack和PopStack均有问题
