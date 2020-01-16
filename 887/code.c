@@ -189,7 +189,7 @@
 
 
 //未参考之前思路，依旧是dp
-//F(K,N)=min(1<=n<=Nmax(F(K,n-1),F(K,N-n)))
+//F(K,N)=min(1<=n<=Nmax(F(K,n-1),F(K-1,N-n)))
 #define getMin(x,y) ((x<y)?x:y)
 #define getMax(x,y) ((x>y)?x:y)
 
@@ -210,6 +210,17 @@ int superEggDrop(int K, int N){
     for (i = 0; i <= K;i++){
         resF[i] = (int *)malloc(sizeof(int) * (N + 1));
     }
-
+    for (i = 0; i <= K;i++){
+        resF[i] = (int *)malloc(sizeof(int) * (N + 1));
+    }
     
+    for (i = 1; i <= K;i++){
+        int j;
+        for (j = 1; j <= N;j++){
+            int k;
+            for (k = 1; k <= j;k++){
+                resF[i][j]=resF
+            }
+        }
+    }
 }
