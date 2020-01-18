@@ -48,10 +48,9 @@ void getAllElementsResults(struct TreeNode* root1, struct TreeNode* root2, int* 
     dummy1 = root1;
     dummy2 = root2;
 
-    if(dummy1==NULL||dummy2==NULL){
-        return;
-    }
-
+    //需要考虑的点：
+    //1、其中一个为空时怎么融入现有代码
+    //2、排序算法，下面我还没看
     if(dummy1->val > dummy2->val){
         dummy1 = dummy1->left;
         getAllElementsResults(dummy1, dummy2, result, returnSize);

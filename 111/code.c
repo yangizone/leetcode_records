@@ -7,21 +7,21 @@
  * };
  */
 
-int minDepth(struct TreeNode* root){
-	if(root == NULL){
-		return 0;
-	}
+#define getMax(x,y) ((x>y)?x:y)
 
-	int left_length = minDepth(root->left) + 1;
-	int right_length = minDepth(root->right) + 1;
-	
-	if( root->left == NULL ){
-		return right_length;
-	}else if( root->right == NULL ){
-		return left_length;
-	}else if( left_length >= right_length ){
-		return right_length;
-	}else{
-		return left_length;
-	}
+bool flag = false;
+
+int minDepth(struct TreeNode* root){
+    //有个问题：根与叶节点为同一个节点时返回1，单独叶节点返回0
+    //该代码没考虑到单独叶节点返回0
+    if(root == NULL){
+        return 0;
+    }
+    //加了个判断还是错误！
+    if(root->left==NULL&&root->right==NULL){
+        int res = flag ? 0 : 1;
+        flag = true;
+        return res;
+    }
+    return getMax(minDepth(root->left), minDepth(root->right)) + 1;
 }

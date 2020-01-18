@@ -10,17 +10,31 @@
  */
 
 //回溯算法
+//执行用时 :44 ms, 在所有 C 提交中击败了16.72%的用户
+//内存消耗 :23.3 MB, 在所有 C 提交中击败了7.68%的用户
 #include <string.h>
 
 void backTrace(char *S, int* returnSize, char **result,char *dummy, int index, int len){
-    if(index==len){
-        //result[*returnSize] = dummy;
-        memcpy(result[*returnSize], dummy, sizeof(char) * (len + 1));
-        *returnSize++;
+    if(index>=len){
+        memcpy(result[(*returnSize)], dummy, sizeof(char) * (len + 1));
+        (*returnSize)++;
         return;
     }
-    if(isdigit(S)){
-        dummy[index]=
+    if(isdigit(S[index])){
+        dummy[index] = S[index];
+        backTrace(S, returnSize, result, dummy, index + 1, len);
+    }
+    if(islower(S[index])){
+        dummy[index] = S[index];
+        backTrace(S, returnSize, result, dummy, index + 1, len);
+        dummy[index] = S[index] - 'a' + 'A';
+        backTrace(S, returnSize, result, dummy, index + 1, len);
+    }
+    if(isupper(S[index])){
+        dummy[index] = S[index];
+        backTrace(S, returnSize, result, dummy, index + 1, len);
+        dummy[index] = S[index] - 'A' + 'a';
+        backTrace(S, returnSize, result, dummy, index + 1, len);
     }
     return;
 }
@@ -35,7 +49,6 @@ char ** letterCasePermutation(char * S, int* returnSize){
     }
     char *dummy = (char *)malloc(sizeof(char) * (len + 1)); //存放当前满足要求的字符串
     memset(dummy, '\0', sizeof(char) * (len + 1));
-    int index = 0;
     backTrace(S, returnSize, result, dummy, 0, len);
     return result;
 }
