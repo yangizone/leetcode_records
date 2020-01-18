@@ -6,31 +6,18 @@
  * };
  */
 
+//执行用时 :12 ms, 在所有 C 提交中击败了40.18%的用户
+//内存消耗 :8.3 MB, 在所有 C 提交中击败了40.54%的用户
 struct ListNode* oddEvenList(struct ListNode* head){
-    if(head == NULL){
-        return 0;
+    if(!head || !head->next) return head;
+    struct ListNode *pre=head,*cur=head->next;
+    while(cur && cur->next){
+        struct ListNode* tmp=pre->next;
+        pre->next=cur->next;
+        cur->next=cur->next->next;
+        pre->next->next=tmp;
+        pre=pre->next;
+        cur=cur->next;
     }
-    struct ListNode *nodeHead = (struct ListNode *)malloc(sizeof(struct ListNode));
-    nodeHead = head;
-    int index = 0;
-    while(head != NULL){
-        if (head->next == NULL || head->next->next == NULL)
-        {
-            break;
-        }
-        if(index%2 == 0){
-            oddNode->next = head->next;
-            if(head->next->next!=NULL){
-                head->next = head->next->next;
-                head->next->next = head;
-            }
-            else{
-                head->next->next = (struct ListNode *)malloc(sizeof(struct ListNode));
-                head->next->next = head;
-            }
-        }
-        index++;
-        head = head->next;
-    }
-    return nodeHead;
+    return head;
 }
