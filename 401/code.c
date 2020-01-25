@@ -4,6 +4,8 @@
 
 void getBinaryWatch(int num, int* returnSize, char **result, int *ishoursUsed, int *isminutesUsed, int usedNums, int hours, int minutes){
     //判断返回条件
+    //当数量过多需要返回
+    //当用完所有灯需要将结果保存，返回
     if(usedNums==num){
         //将当前亮灯的时间传入结果指针中返回
 
@@ -15,7 +17,7 @@ void getBinaryWatch(int num, int* returnSize, char **result, int *ishoursUsed, i
 char ** readBinaryWatch(int num, int* returnSize){
     *returnSize = 0;
     //入参校验
-    if(num==0){
+    if(num<0){
         return 0;
     }
     int hours[] = {1, 2, 4, 8};
@@ -28,7 +30,7 @@ char ** readBinaryWatch(int num, int* returnSize){
     memset(isminutesUsed, 0, sizeof(int) * 6);
 
     //初始化返回结果
-    char **result = (char **)malloc(sizeof(char * 1000));
+    char **result = (char **)malloc(sizeof(char *) * 1000);
     int i;
     for (i = 0; i < 1000;i++){
         result[i] = (char *)malloc(sizeof(char) * 6);
