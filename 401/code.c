@@ -8,7 +8,7 @@ void getBinaryWatch(int num, int* returnSize, char **result, int *ishoursUsed, i
     //当用完所有灯需要将结果保存，返回
     if(usedNums==num){
         //将当前亮灯的时间传入结果指针中返回
-
+        
         (*returnSize)++;
         return;
     }
